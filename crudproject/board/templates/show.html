@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+
+<div id="header">
+    <h1>My Page</h1>
+</div>
+<h4><a href="{% url 'post' %}"><글 작성하러 가기></a></h4>
+{%for board in posts %}
+<div class="container">
+    <a href="{% url 'detail' board.id %}">
+        <h1 class="title">제목: {{board.title}}</h1>
+    </a>
+    <div class="cont-box">
+        <p>내용: {{board.body}}</p>
+    </div>
+    <small class="text-muted">{{board.pub_date}}</small>
+</div>
+{% endfor %}
+
+{% if posts.has_previous %}
+<a href="?page=1">First</a>
+<a href="?page={{posts.previous_page_number}}">Previous</a>
+{% endif %}
+
+<span>{{posts.number}}</span>
+<span>of</span>
+<span>{{posts.paginator.num_pages}}</span>
+
+{% if posts.has_next %}
+<a href="?page={{posts.next_page_number}}">NEXT</a>
+<a href="?page={{posts.paginator.num_pages))">LAST</a>
+{% endif %}
+<br>
+<div style="position: fixed; bottom: 5px; right: 5px;">
+    <a href="#header"><p class="top">TOP</p></a>
+</div>
+{% endblock %}

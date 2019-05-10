@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+
+
+<div class ='container'>
+    <Form method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <br>
+        <input class="btn btn-dark" type="submit" value="수정">
+    </Form>
+</div>
+
+{% endblock %}
